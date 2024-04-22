@@ -6,6 +6,7 @@ import { db } from "../config/firebase";
 import { deleteDoc, doc } from 'firebase/firestore';
 import useDisclose from '../hooks/useDisclose';
 import AddAndUpdateContact from './AddAndUpdateContact';
+import { toast } from 'react-toastify';
 
 
 const ContactCard = ({contact}) => {
@@ -18,7 +19,7 @@ const ContactCard = ({contact}) => {
 try {
 
   await deleteDoc(doc(db , "contacts", id))
-
+ toast.success("Contact Deleted Successfully")
   
 } catch (error) {
     console.log(error)
@@ -42,7 +43,7 @@ try {
         </div>
         <div className='flex text-3xl'>
         <RiEditCircleLine onClick={onOpen} className='cursor-pointer' />
-        <IoMdTrash onClick={()=>deleteContact(contact.id)} className='text-orange '/>
+        <IoMdTrash onClick={()=>deleteContact(contact.id)} className='text-orange cursor-pointer '/>
 
         </div>
 
